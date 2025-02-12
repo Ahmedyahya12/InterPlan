@@ -1,62 +1,175 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>Login - ToDo App</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-</head>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
+  </head>
 
-<body class="bg-gradient-primary">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-9 col-lg-12 col-xl-10">
-                <div class="card shadow-lg o-hidden border-0 my-5">
-                    <div class="card-body p-0">
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-flex">
-                                <div class="flex-grow-1 bg-login-image" style="background: url(&quot;assets/img/gdg.jpg&quot;) no-repeat;background-size: cover;"></div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h4 class="text-dark mb-4" class="wlc">Welcome Back!</h4>
-                                        <button class="btn btn-primary btn-block text-white btn-user" style="display: none;" id="logout-user">Logout</button>
-
-                                    </div>
-                                    <div class="user">
-                                        <div class="form-group"><input class="form-control form-control-user" type="email" id="Email" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
-                                        <div class="form-group"><input class="form-control form-control-user" type="password" id="Password" placeholder="Password" name="password"></div>
-                                        <button class="btn btn-primary btn-block text-white btn-user"  id="login-user">Login</button>
-                                        <hr>
-                                    </div>
-                                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
-                                    <div class="text-center"><a class="small" href="register.html">Create an Account!</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <body class="bg-gradient-primary">
     <footer>
-        <div class="row text-center justify-content-center">
-            <div class="col-md-4"><img src="assets/img/touchicon.png" alt="Logout" width="80"></div>
+      <div class="row text-center justify-content-center">
+        <div class="col-md-12">
+          <img
+            src="assets/img/logo.png"
+            alt="logo"
+            style="
+              width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              border: rgb(120, 120, 223) 2px solid;
+            "
+          />
         </div>
+        <h4
+          style="
+            color: #000000;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+          "
+        >
+          InterPlan
+        </h4>
+      </div>
     </footer>
+    <div class="container mt-0">
+      <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-12 col-xl-10">
+          <div class="card shadow-lg o-hidden border-0 my-2">
+            <div class="card-body p-0">
+              <div class="row">
+                <!-- <img src="assets/img/" alt=""> -->
+                <div class="col-lg-6 d-none d-lg-flex">
+                  <div
+                    class="flex-grow-1 bg-login-image"
+                    style="
+                      background: url('assets/img/login1.jpg') no-repeat;
+                      background-size: cover;
+                    "
+                  ></div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="p-5">
+                    <div class="text-center">
+                      <h4 class="text-dark mb-4" class="wlc">Welcome Back!</h4>
+                      <button
+                        class="btn btn-primary btn-block text-white btn-user"
+                        style="display: none"
+                        id="logout-user"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                    <div class="user">
+                      <form
+                        class="was-validated"
+                        id="validationForm"
+                        novalidate
+                      >
+                        <!-- Champ Email -->
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                          />
+                          <div class="invalid-feedback">
+                            Please enter a valid email.
+                          </div>
+                        </div>
+
+                        <!-- Champ Mot de Passe -->
+                        <div class="mb-3">
+                          <label for="password" class="form-label"
+                            >Password</label
+                          >
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                            minlength="6"
+                          />
+                          <div class="invalid-feedback">
+                            Password must be at least 6 characters long.
+                          </div>
+                        </div>
+
+                        <!-- Bouton de soumission désactivé par défaut -->
+                        <div class="mb-3">
+                          <button
+                            class="btn btn-primary"
+                            type="submit"
+                            id="submitButton"
+                            disabled
+                          >
+                            Login
+                          </button>
+                        </div>
+                      </form>
+
+                      <hr />
+                    </div>
+                    <div class="text-center">
+                      <a class="small" href="forgot-password.html"
+                        >Forgot Password?</a
+                      >
+                    </div>
+                    <div class="text-center">
+                      <a class="small" href="register.html"
+                        >Create an Account!</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("validationForm");
+        const submitButton = document.getElementById("submitButton");
+
+        form.addEventListener("input", () => {
+          if (form.checkValidity()) {
+            submitButton.removeAttribute("disabled");
+          } else {
+            submitButton.setAttribute("disabled", true);
+          }
+        });
+      });
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
-    
-
-
-</body>
-
+  </body>
 </html>
