@@ -1,0 +1,27 @@
+{
+  "name": "interplan",
+  "version": "1.0.0",
+  "description": "This is our JavaScript project for the first semester (S1) of the Master's program in Software Engineering at the Faculty of Science in Nouakchott.",
+  "main": "line-chart.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahmedyahya12/InterPlan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ahmedyahya12/InterPlan/issues"
+  },
+  "homepage": "https://github.com/Ahmedyahya12/InterPlan#readme",
+  "dependencies": {
+    "firebase": "^11.3.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  }
+}
