@@ -1,0 +1,18 @@
+#table-tasks tr {
+    background-color: #f9f9f9; /* Light gray background for odd rows */
+    border-bottom: 1px solid #ddd; /* Bottom border for each row */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Box-shadow effect */
+    margin-bottom: 10px; /* Space between rows */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and scale */
+  }
+  
+  #table-tasks tr:nth-child(even) {
+    background-color: #ffffff; /* White background for even rows */
+  }
+  
+  #table-tasks tr:hover {
+    background-color: #f1f1f1; /* Background color on hover */
+    transform: scale(1.02); /* Slightly enlarge the row on hover */
+  }
+  
