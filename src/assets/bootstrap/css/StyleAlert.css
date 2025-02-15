@@ -1,0 +1,19 @@
+.alert {
+    width: 50%;
+    position: fixed !important ;
+    right: 5px;
+    top: 9px;
+    z-index: 11 !important;
+  }
+  .alert-with-progress {
+    position: relative;
+    padding-right: 2.5rem;
+    display: block; /* Display the alert by default */
+    width: fit-content;
+  }
+  .alert-with-progress .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }

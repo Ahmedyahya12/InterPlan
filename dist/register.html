@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Register - ToDo App</title>
+    <link rel="stylesheet" href="../src/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
+    <link rel="stylesheet" href="../src/assets/bootstrap/css/StyleAlert.css">
+    <script src="./bundle.js"></script>
+  </head>
+  <body class="bg-gradient-primary">
+   
+     
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div id="alertContainer"></div>
+      <div class="card shadow-lg o-hidden border-0 my-2" style="width: 80%; text-align: center">
+        <div class="card-body p-0">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h4 class="text-dark mb-4">Create an Account!</h4>
+                </div>
+                <form  class="was-validated RegistrForm" id="registrationForm" novalidate>
+                  <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" required />
+                    <div class="invalid-feedback">Please enter your first name.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" required />
+                    <div class="invalid-feedback">Please enter your last name.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required />
+                    <div class="invalid-feedback">Please enter a valid email.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required />
+                    <div class="invalid-feedback">Please enter a password.</div>
+                  </div>
+                  <div class="mb-3">
+                    <button class="btn btn-primary" type="submit" id="submitButton" disabled>Register</button>
+                  </div>
+                </form>
+                <hr />
+                <div class="text-center">
+                  <a class="small" href="forgot-password.html">Forgot Password?</a>
+                </div>
+                <div class="text-center">
+                  <a class="small" href="login.html">Already have an account? Login!</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-flex">
+              <div class="flex-grow-1 bg-register-image" style="background: url('../src/assets/img/register.jpg') no-repeat; background-size: cover;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("registrationForm");
+        const submitButton = document.getElementById("submitButton");
+
+        form.addEventListener("input", function () {
+          if (form.checkValidity()) {
+            submitButton.removeAttribute("disabled");
+          } else {
+            submitButton.setAttribute("disabled", "true");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
