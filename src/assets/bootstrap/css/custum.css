@@ -1,18 +1,55 @@
 #table-tasks tr {
-    background-color: #f9f9f9; /* Light gray background for odd rows */
-    border-bottom: 1px solid #ddd; /* Bottom border for each row */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Box-shadow effect */
-    margin-bottom: 10px; /* Space between rows */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and scale */
-  }
-  
-  #table-tasks tr:nth-child(even) {
-    background-color: #ffffff; /* White background for even rows */
-  }
-  
-  #table-tasks tr:hover {
-    background-color: #f1f1f1; /* Background color on hover */
-    transform: scale(1.02); /* Slightly enlarge the row on hover */
-  }
-  
+  background-color: #f9f9f9; /* Light gray background for odd rows */
+  border-bottom: 1px solid #ddd; /* Bottom border for each row */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Box-shadow effect */
+  margin-bottom: 10px; /* Space between rows */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and scale */
+}
+
+#table-tasks tr:nth-child(even) {
+  background-color: #ffffff; /* White background for even rows */
+}
+
+#table-tasks tr:hover {
+  background-color: #f1f1f1; /* Background color on hover */
+  transform: scale(1.02); /* Slightly enlarge the row on hover */
+}
+
+#table-tasks tr.Terminer {
+  background-color: rgba(0, 128, 0, 0.2); /* Vert clair avec opacité */
+  opacity: 0.7; /* Réduction de l'opacité */
+  text-decoration: line-through; /* Texte barré */
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+#table-tasks tr.Terminer:hover {
+  background-color: rgba(0, 128, 0, 0.4); /* Légèrement plus foncé au survol */
+  opacity: 1; /* Restauration de l'opacité au survol */
+}
+
+#table-tasks tr.EnCours {
+  background-color: rgba(0, 123, 255, 0.1); /* Bleu clair pour en cours */
+  opacity: 1;
+}
+
+#table-tasks tr.Annule {
+  background-color: rgba(255, 0, 0, 0.2); /* Rouge clair pour annulé */
+  opacity: 0.8;
+  text-decoration: line-through; /* Texte barré pour annulé */
+}
+
+#table-tasks tr.EnAttente {
+  background-color: rgba(255, 193, 7, 0.2); /* Jaune clair pour en attente */
+  opacity: 0.9;
+}
+
+#table-tasks tr.NonPris {
+  background-color: rgba(108, 117, 125, 0.2); /* Gris pour non pris en charge */
+  opacity: 0.7;
+}
+
+#table-tasks tr.NonApprouve {
+  background-color: rgba(52, 58, 64, 0.2); /* Gris foncé pour non approuvé */
+  opacity: 0.7;
+}
