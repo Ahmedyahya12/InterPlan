@@ -13,17 +13,10 @@ export const getInterventionsStatsGl = () => {
     const clientInterventionsQuery = query(interventionsRef);
 
     onSnapshot(clientInterventionsQuery, (querySnapshot) => {
-      let statsGlobales = {
-        termineCount: 0,
-        enAttenteCount: 0,
-        annuleCount: 0,
-        nonPrisEnChargeCount: 0,
-      };
-
       let statsParClient = {};
 
       if (querySnapshot.empty) {
-        console.log("Aucune intervention trouvée pour ce client.");
+        console.log("Aucune intervention trouvée.");
       } else {
         querySnapshot.forEach((doc) => {
           const data = doc.data();
@@ -42,18 +35,21 @@ export const getInterventionsStatsGl = () => {
               };
             }
 
-            if (data.etat === "Terminé") {
-              statsGlobales.termineCount++;
-              statsParClient[clientId].termineCount++;
-            } else if (data.etat === "En attente") {
-              statsGlobales.enAttenteCount++;
-              statsParClient[clientId].enAttenteCount++;
-            } else if (data.etat === "Annulé") {
-              statsGlobales.annuleCount++;
-              statsParClient[clientId].annuleCount++;
-            } else if (data.etat === "Non pris en charge") {
-              statsGlobales.nonPrisEnChargeCount++;
-              statsParClient[clientId].nonPrisEnChargeCount++;
+            switch (data.etat) {
+              case "Terminé":
+                statsParClient[clientId].termineCount++;
+                break;
+              case "En attente":
+                statsParClient[clientId].enAttenteCount++;
+                break;
+              case "Annulé":
+                statsParClient[clientId].annuleCount++;
+                break;
+              case "Non pris en charge":
+                statsParClient[clientId].nonPrisEnChargeCount++;
+                break;
+              default:
+                console.warn(`État inconnu : ${data.etat}`);
             }
           } else {
             console.error("Le champ client.Id est manquant dans le document : ", doc.id);
@@ -61,36 +57,39 @@ export const getInterventionsStatsGl = () => {
         });
       }
 
-      localStorage.setItem("statsIntrParGl", JSON.stringify(statsGlobales));
       localStorage.setItem("statsIntrParClient", JSON.stringify(statsParClient));
+      console.log("Mise à jour des statistiques par client :", statsParClient);
 
-      console.log("Mise à jour stats globales :", statsGlobales);
-      console.log("Mise à jour stats par client :", statsParClient);
+      afficherTableauStats();
     });
-
-    const tab=document.querySelector(".tab-satats")
-    const statsParClient = JSON.parse(localStorage.getItem("statsIntrParClient")) || {};
-    for (const clientId in statsParClient) {
-      if (statsParClient.hasOwnProperty(clientId)) {
-        const clientData = statsParClient[clientId];
-     
-        if(tab){
-          tab.innerHTML+=
-          `
-           <tr>
-              <td style="font-weight: 800;">${clientData.name}</td>
-              <td><span class="badge badge-success">${clientData.termineCount}</span></td>
-              <td><span class="badge badge-warning">${clientData.enAttenteCount}</span></td>
-              <td><span class="badge badge-danger">${clientData.annuleCount}</span></td>
-              <td><span class="badge badge-secondary">${clientData.nonPrisEnChargeCount}</span></td>
-            </tr>
-          `
-
-        }
-       
-        
-      }
-    }
-    
   });
+};
+
+const afficherTableauStats = () => {
+  const statsParClient = JSON.parse(localStorage.getItem("statsIntrParClient")) || {};
+  const tableBody = document.querySelector("#tab-stats");
+
+  if (!tableBody) {
+    console.error("Élément avec l'ID 'tab-stats' non trouvé.");
+    return;
+  }
+
+  tableBody.innerHTML = ""; // Réinitialiser le contenu du tableau
+
+  for (const clientId in statsParClient) {
+    if (statsParClient.hasOwnProperty(clientId)) {
+      const clientData = statsParClient[clientId];
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td style="font-weight: 800;">${clientData.name}</td>
+        <td><span class="badge bg-success text-white ">${clientData.termineCount}</span></td>
+        <td><span class="badge bg-warning  text-white ">${clientData.enAttenteCount}</span></td>
+        <td><span class="badge bg-danger text-white ">${clientData.annuleCount}</span></td>
+        <td><span class="badge bg-secondary text-white ">${clientData.nonPrisEnChargeCount}</span></td>
+      `;
+
+      tableBody.appendChild(row);
+    }
+  }
 };

@@ -18,7 +18,7 @@ import { afficherIntr } from "./pages/afficherInterv";
 import { AddClient } from "./pages/AjouterClient";
 import { AddIntervention } from "./pages/AjouterInter";
 import { verifierUtilisateur } from "./pages/verifierUtilisateur";
-import { getInterventionsStats } from "./pages/Statisque";
+import { getInterventionsStats, getInterventionsStatsGCard } from "./pages/Statisque";
 import { cacherPage } from "./pages/cacherMenuAdmin";
 import { afficherDetIntr } from "./pages/afficherDetIntr";
 import { afficherDetIntrUpd, updateFields } from "./pages/ModifieIntr";
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const FormAddIntr = document.querySelector(".AddInter");
 
   if (FormAddIntr) {
-    FormAddIntr.addEventListener("submit",  (e) => {
+    FormAddIntr.addEventListener("submit",   (e) => {
       e.preventDefault();
       const motif = FormAddIntr.motif.value;
       const type = FormAddIntr.type.value;
@@ -256,9 +256,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
  
   getInterventionsStatsGl();
-  
+
   getInterventionsStats();
 
+  getInterventionsStatsGCard()
 
   function calStats() {
     try {
@@ -275,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
           stats.nonPrisEnChargeCount;
       } 
       else if (window.location.pathname.includes("stats.html")) {
-        const stats = JSON.parse(localStorage.getItem("statsIntrParGl"));
+        const stats = JSON.parse(localStorage.getItem("statsIntrventionGen"));
         if (!stats) return; // Évite une erreur si le localStorage est vide
 
         document.getElementById("stat-termine").textContent =
