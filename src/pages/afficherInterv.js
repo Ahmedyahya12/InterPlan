@@ -1,17 +1,15 @@
 import {
   collection,
-  getDocs,
   onSnapshot,
   orderBy,
   query,
-  where,
   deleteDoc,
-  doc
+  doc,
+  where,
 } from "firebase/firestore";
-import { auth, db } from "../config/firebaseConfig";
+import { db, auth } from "../config/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 
-// Fonction principale pour afficher les interventions
 export const afficherIntr = async (table) => {
   onAuthStateChanged(auth, (user) => {
     if (!user) {
@@ -26,14 +24,11 @@ export const afficherIntr = async (table) => {
     // Filtrer les interventions par utilisateur connecté
     const queryIntervention = query(
       interventionCollection,
-      
+      where("client.Id", "==", user.uid),
       orderBy("date", "desc")
     );
 
-    // Écoute les changements en temps réel
     onSnapshot(queryIntervention, (snapshot) => {
-      table.innerHTML = "";
-
       if (snapshot.empty) {
         table.innerHTML = `  
           <tr>
@@ -49,12 +44,19 @@ export const afficherIntr = async (table) => {
         ...doc.data(),
       }));
 
+      console.log("Liste complète des interventions :", interventions);
+
       const isAdminPage = window.location.pathname.includes("admin.html");
 
+      // Construire une chaîne de caractères pour le contenu HTML
+      let tableContent = "";
+
       interventions.forEach((intr) => {
+        console.log("Intervention :", intr);
+
         const modalId = `ModelSup-${intr.id}`;
 
-        table.innerHTML += `
+        tableContent += `
           <tr class="${getEtatClass(intr.etat)}">
             <td>
               ${
@@ -71,19 +73,16 @@ export const afficherIntr = async (table) => {
             ${
               isAdminPage
                 ? `
-                  <td>
-                    <a href="Adm_Intr_detail.html?id=${intr.id}" class="btn btn-info">
-                      <i class="fa fa-eye"></i>
-                    </a>
-                    <button class="btn btn-danger btn-delete" data-id="${intr.id}" data-bs-toggle="modal" data-bs-target="#${modalId}">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </td>
-                `
+            <td>
+              <a href="Adm_Intr_detail.html?id=${intr.id}" class="btn btn-info">
+                <i class="fa fa-eye"></i>
+              </a>
+              <button class="btn btn-danger btn-delete" data-id="${intr.id}" data-bs-toggle="modal" data-bs-target="#${modalId}">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+            `
                 : ""
-                
-                
-                
             }
           </tr>
 
@@ -109,7 +108,10 @@ export const afficherIntr = async (table) => {
           </div>
         `;
       });
-         
+
+      // Assigner le contenu HTML construit en une seule fois
+      table.innerHTML = tableContent;
+
       // Ajouter les événements aux boutons de suppression
       document.querySelectorAll(".confirm-delete").forEach((button) => {
         button.addEventListener("click", (event) => {
@@ -121,7 +123,6 @@ export const afficherIntr = async (table) => {
   });
 };
 
-// Fonction pour supprimer une intervention
 async function supprimerIntervention(id) {
   if (!id) return;
   try {
@@ -132,7 +133,6 @@ async function supprimerIntervention(id) {
   }
 }
 
-// Fonction pour obtenir la classe CSS de l'état
 function getBadgeClass(etat) {
   switch (etat) {
     case "En cours":
@@ -152,7 +152,6 @@ function getBadgeClass(etat) {
   }
 }
 
-// Fonction pour obtenir la classe CSS du TR
 function getEtatClass(etat) {
   switch (etat) {
     case "Terminé":
@@ -166,8 +165,9 @@ function getEtatClass(etat) {
     case "Non pris en charge":
       return "NonPris";
     case "Non approuvée":
-      return "NonApprouve";
+      return "NonApp"
     default:
-      return "";
+       return 
+ 
   }
 }

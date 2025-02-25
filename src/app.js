@@ -36,6 +36,7 @@ import { verifierAdmins } from "./pages/verifierAdmin";
 import { afficherIntrCl } from "./pages/afficherIntervClient";
 import { getInterventionsStatsGl } from "./pages/StatisqueGl";
 import { exportTableToCSV, exportTableToExcel } from "./pages/ExportStat";
+import { afficherIntrAdmin } from "./pages/afficherIntervAdmin";
 
 document.addEventListener("DOMContentLoaded", () => {
   //Send Email To user
@@ -187,20 +188,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const tableTasks = document.querySelector("#table-tasks");
   const tableClients = document.querySelector("#table-clients");
   const tableIntervent = document.querySelector("#table-inter");
-
-  if (tableTasks) {
-    afficherIntr(tableTasks);
-  }
-
-  if (tableTasks) {
-    afficherIntrCl(tableTasks);
-  }
+  const tableTasksAdm = document.querySelector("#table-tasks-admin");
+  
 
   if (tableClients) {
     afficherClients(tableClients);
   }
   if (tableIntervent) {
     afficherEmpls(tableIntervent);
+  }
+
+  if (tableTasks) {
+    afficherIntr(tableTasks);
+  }
+  if(tableTasksAdm){
+    afficherIntrAdmin(tableTasksAdm)
   }
 
   const DetaiContainer = document.querySelector(".DetaiContainer");
